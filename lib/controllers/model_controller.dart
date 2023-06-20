@@ -24,8 +24,12 @@ class ModelController {
   Future<void> createModel(String title, String body) async {
     try {
       final response = await Dio().post(
-          'https://jsonplaceholder.typicode.com/posts',
-          data: {'title': title, 'body': body, 'userId': 1});
+        'https://jsonplaceholder.typicode.com/posts',
+        data: {'title': title, 'body': body, 'userId': 1},
+        options: Options(headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        }),
+      );
 
       if (response.statusCode == 201) {
         final dynamic data = response.data;
